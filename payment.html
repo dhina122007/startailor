@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment | Star Tailor</title>
+  <meta name="description" content="Secure payment for Star Tailor tailoring services." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .payment-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--charcoal-light);
+      margin-bottom: var(--space-xs);
+    }
+    .payment-note {
+      font-size: 0.8rem;
+      color: var(--charcoal-light);
+      line-height: 1.65;
+    }
+    .cashfree-placeholder {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-xl);
+      text-align: center;
+      background: var(--beige);
+      margin: var(--space-lg) 0;
+    }
+    .cashfree-placeholder p {
+      font-size: 0.85rem;
+      color: var(--charcoal-light);
+    }
+  </style>
+</head>
+<body>
+
+<nav id="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Star Tailor — Home">
+      <span class="logo-name">STAR TAILOR</span>
+      <span class="logo-tagline">Women's Tailoring &amp; Aari Work</span>
+    </a>
+    <a href="index.html" class="btn btn-outline btn-sm">← Back to Home</a>
+  </div>
+</nav>
+
+<div class="payment-page">
+  <div class="payment-card">
+
+    <div style="margin-bottom:var(--space-xl);">
+      <div class="logo-name" style="font-family:var(--font-heading);font-size:1.2rem;font-weight:700;color:var(--charcoal);">STAR TAILOR</div>
+      <div style="font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--charcoal-light);margin-top:3px;">Secure Payment</div>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="payment-label">Order Summary</div>
+    <hr class="payment-divider" style="margin-top:var(--space-sm);" />
+
+    <!--
+      These values will be populated dynamically when payment integration is live.
+      Replace with real order data from your backend.
+    -->
+    <div class="payment-row">
+      <span>Service</span>
+      <span id="pay-service">Designer Blouse</span>
+    </div>
+    <div class="payment-row">
+      <span>Customer Name</span>
+      <span id="pay-name">—</span>
+    </div>
+    <div class="payment-row">
+      <span>Order Reference</span>
+      <span id="pay-ref">ST-2026-001</span>
+    </div>
+    <div class="payment-row total">
+      <span>Amount to Pay</span>
+      <span id="pay-amount">₹ —</span>
+    </div>
+
+    <hr class="payment-divider" />
+
+    <!-- Payment Status (shown after payment attempt) -->
+    <div id="payment-status" class="payment-status pending" style="display:none;" role="status">
+      <p id="payment-status-text">Processing…</p>
+    </div>
+
+    <!-- Cashfree SDK Placeholder -->
+    <!--
+      ══════════════════════════════════════════════════════════════
+      CASHFREE PAYMENT INTEGRATION — ACTIVATE WHEN READY
+      ══════════════════════════════════════════════════════════════
+      Steps to activate:
+      1. Create a Cashfree merchant account at cashfree.com
+      2. Get your App ID and Secret Key
+      3. Generate an order_token from your backend (server.js)
+         POST https://api.cashfree.com/pg/orders
+      4. Include the Cashfree JS SDK:
+         <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+      5. Replace the placeholder div below with the payment button
+         and initialize Cashfree with your order_token.
+
+      Example SDK code:
+      const cashfree = Cashfree({ mode: "production" });
+      cashfree.checkout({
+        paymentSessionId: "YOUR_ORDER_TOKEN",
+        returnUrl: "https://startailor.in/payment.html?status={order_status}",
+      });
+      ══════════════════════════════════════════════════════════════
+    -->
+
+    <div class="cashfree-placeholder" id="cashfree-payment-area">
+      <svg style="width:36px;height:36px;stroke:var(--gold);fill:none;stroke-width:1.5;margin-bottom:8px;" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      <p><strong>Payment Gateway</strong></p>
+      <p>Cashfree payment will appear here once configured.</p>
+      <p style="margin-top:8px;">Contact: <a href="tel:+916381760498">+91 63817 60498</a></p>
+    </div>
+
+    <hr class="payment-divider" />
+
+    <!-- Refund Terms Summary -->
+    <div class="payment-label">Refund Terms</div>
+    <p class="payment-note">
+      Custom-stitched orders are non-refundable once stitching has begun.
+      Cancellations before stitching starts qualify for a full refund of any advance paid,
+      processed within 5–7 business days.
+      <a href="refund.html" style="color:var(--gold);text-decoration:underline;">Read full policy →</a>
+    </p>
+
+    <div style="margin-top:var(--space-lg);text-align:center;">
+      <p class="payment-note">
+        Questions? Call or WhatsApp us at<br />
+        <a href="tel:+916381760498" style="font-weight:600;color:var(--charcoal);">+91 63817 60498</a>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Read URL params to populate order details (for future backend integration)
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('service'))  document.getElementById('pay-service').textContent  = decodeURIComponent(params.get('service'));
+  if (params.get('name'))     document.getElementById('pay-name').textContent     = decodeURIComponent(params.get('name'));
+  if (params.get('ref'))      document.getElementById('pay-ref').textContent      = decodeURIComponent(params.get('ref'));
+  if (params.get('amount'))   document.getElementById('pay-amount').textContent   = '₹ ' + decodeURIComponent(params.get('amount'));
+
+  // Show payment status if returned from Cashfree
+  const status = params.get('status');
+  if (status) {
+    const statusEl   = document.getElementById('payment-status');
+    const statusText = document.getElementById('payment-status-text');
+    statusEl.style.display = 'block';
+    if (status === 'SUCCESS') {
+      statusEl.className = 'payment-status success';
+      statusText.textContent = '✓ Payment successful. We will contact you to confirm your order.';
+    } else if (status === 'FAILED') {
+      statusEl.className = 'payment-status failed';
+      statusText.textContent = '✕ Payment failed. Please try again or contact us directly.';
+    } else {
+      statusEl.className = 'payment-status pending';
+      statusText.textContent = 'Payment status: ' + status + '. Please contact us if you have questions.';
+    }
+  }
+</script>
+
+</body>
+</html>
