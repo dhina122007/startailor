@@ -2,4 +2,7 @@ node_modules/
 .env
 *.db
 *.sqlite
-uploads/
+uploads/*
+!uploads/.gitkeep
+data/*
+!data/.gitkeep
